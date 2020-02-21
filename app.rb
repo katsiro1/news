@@ -6,6 +6,7 @@ require "httparty"
 def view(template); erb template.to_sym; end
 before { puts "Parameters: #{params}" }                                     
 
+
 # enter your Dark Sky API key here
 ForecastIO.api_key = "1980ed0614a7bb78f55579cf1ccf75ff"
 
