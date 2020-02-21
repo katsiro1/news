@@ -23,20 +23,18 @@
   <body>
 
     <div class="container mt-5">
-      <h1>News</h1>
-     <ul>
-    <% for item in @lat_long %>
-      <li><%= item %></li>
-    <% end %>
-  </ul>
+      <h1>Weather</h1>
+  <h2> The current temperature is <%=@current_temperature%> with <%=@conditions%> conditions</h2>
+   <h3> Weather Forecast </h3>
   <ul>
-    <% for x in @forecast %>
+    <% for x in @future %>
       <li><%= x %></li>
     <% end %>
   </ul>
-  <ul>
-    <% for y in @headlines %>
-      <li><%= y %></li>
+  
+ <ul>
+    <% for x in @headlines %>
+      <li><%= x %></li>
     <% end %>
   </ul>
     </div>

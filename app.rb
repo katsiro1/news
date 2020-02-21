@@ -23,9 +23,7 @@ puts "In Evanston, it is currently #{current_temperature} and #{conditions}"
 # puts forecast["daily"]["data"][1]["temperatureHigh"]
 # puts forecast["daily"]["data"][2]["temperatureHigh"]
 
-for day in forecast["daily"]["data"]
-  puts "A high temperature of #{day["temperatureHigh"]} and #{day["summary"]}."
-end
+
 url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=7b70131c38dc4b61880255f84a92d961"
 news = HTTParty.get(url).parsed_response.to_hash
 # news is now a Hash you can pretty print (pp) and parse for your output
@@ -37,20 +35,25 @@ end
 get "/news" do
  results = Geocoder.search(params["q"])
     @lat_long = results.first.coordinates # => [lat, long]
-    @headlines = news
+    
     @forecast = ForecastIO.forecast(@lat_long[0],@lat_long[1]).to_hash
-@current_temperature = @forecast["currently"]["temperature"]
+@current_temperature = forecast["currently"]["temperature"]
 @conditions = @forecast["currently"]["summary"]
 puts "In Evanston, it is currently #{current_temperature} and #{conditions}"
 # high_temperature = forecast["daily"]["data"][0]["temperatureHigh"]
 # puts high_temperature
 # puts forecast["daily"]["data"][1]["temperatureHigh"]
 # puts forecast["daily"]["data"][2]["temperatureHigh"]
-
+daytrait = []
 for day in forecast["daily"]["data"]
-  puts "A high temperature of #{day["temperatureHigh"]} and #{day["summary"]}."
+  daytrait << "A high temperature of #{day["temperatureHigh"]} and #{day["summary"]}."
 end
+@future = daytrait
 
+titles = []
+for x in news["articles"]
+    titles << "#{x["title"]}"
+end
+@headlines = titles
 
-    view "news"
 end
