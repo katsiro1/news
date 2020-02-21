@@ -50,10 +50,10 @@ for day in forecast["daily"]["data"]
 end
 @future = daytrait
 
-titles = []
-for x in news["articles"]
-    titles << "#{x["title"]}"
-end
-@headlines = titles
-
+#titles = []
+#for x in news["articles"]
+#    titles << "#{x["title"]}"
+#end
+#@headlines = titles
+view "news"
 end
