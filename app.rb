@@ -25,8 +25,7 @@ puts "In Evanston, it is currently #{current_temperature} and #{conditions}"
 # puts forecast["daily"]["data"][2]["temperatureHigh"]
 
 
-url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=7b70131c38dc4b61880255f84a92d961"
-news = HTTParty.get(url).parsed_response.to_hash
+
 # news is now a Hash you can pretty print (pp) and parse for your output
 
 get "/" do
@@ -51,10 +50,12 @@ for day in forecast["daily"]["data"]
 end
 @future = daytrait
 
-#titles = []
-#for x in news["articles"]
-#    titles << "#{x["title"]}"
-#end
-#@headlines = titles
+url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=7b70131c38dc4b61880255f84a92d961"
+news = HTTParty.get(url).parsed_response.to_hash
+titles = []
+for x in news["articles"]
+    titles << x["title"]
+end
+@headlines = titles
 view "news"
 end
